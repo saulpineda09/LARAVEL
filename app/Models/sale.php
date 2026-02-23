@@ -11,7 +11,7 @@ class sale extends Model
     use SoftDeletes;
 
     //fillable sirve para asignar masivamente 
-    protected $fillable = ['date', 'total', 'user_id'];
+    protected $fillable = ['email', 'sale_date', 'total', 'user_id']; //el formato esperado para el dia es: (año-mes-dia) YYYY-MM-DD
 
     protected $hidden=['deleted_at', 'created_at', 'updated_at'];
 

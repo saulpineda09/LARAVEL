@@ -22,7 +22,7 @@ class SaleRequest extends apiFormRequest
     public function rules(): array
     {
         return [
-            'sale_date' => 'required|date', 
+            'sale_date' => 'required|date', //el formato eperado es: YYYY-MM-DD (año-mes-dia)
             'email'=> 'required|email', 
             'concepts' => 'required|array|min:1',
             'concepts.*quantity'=> 'required|numeric|min:1',
