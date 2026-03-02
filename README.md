@@ -38,6 +38,7 @@ php artisan migrate
 ```
 Es una herramienta de Laravel para crear las tablas de la base de datos automáticamente según lo que hayas definido en tus archivos de migraciones.
 
+
 ## ¿Qué hace? 
 1. **Busca las migraciones**   
 Laravel guarda en la carpeta database/migrations archivos que definen cómo deben crearse las tablas (usuarios, sesiones, posts, etc.).
@@ -110,6 +111,16 @@ php artisan make:model (nombre de la tabla)
 
 ```bash
 php artisan make:factory (nombre del factory)
+```
+# CREAR RESOURCE 
+
+```bash
+php artisan make:resource RolResource
+```
+# CREAR UN COLLECTION 
+
+```bash
+php artisan make:resource RolCollection
 ```
 
 # CREAR UN REQUEST 
