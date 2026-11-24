@@ -1,4 +1,4 @@
-# 🚀 Laravel — Guía rápida de comandos
+#  Laravel — Guía rápida de comandos
  
 Referencia corta de los comandos que más se usan en Laravel, con ejemplos listos para copiar.
  
@@ -16,7 +16,7 @@ Referencia corta de los comandos que más se usan en Laravel, con ejemplos listo
 - [Colas y comandos propios](#-colas-y-comandos-propios)
 ---
  
-## 📦 Instalación
+##  Instalación
  
 Requisitos: **PHP** y **Composer**.
  
@@ -30,7 +30,7 @@ laravel new mi-proyecto
  
 ---
  
-## ▶️ Ejecutar el proyecto
+##  Ejecutar el proyecto
  
 ```bash
 cd mi-proyecto
@@ -53,7 +53,7 @@ DB_PASSWORD=
 3. Crea la base de datos en phpMyAdmin con el **mismo nombre** que pusiste en `DB_DATABASE`.
 ---
  
-## 🗄️ Migraciones
+##  Migraciones
  
 Las migraciones **versionan tu base de datos**: crean y modifican tablas con código en lugar de SQL manual. Laravel guarda en la tabla `migrations` cuáles ya se ejecutaron.
  
@@ -91,7 +91,7 @@ Schema::create('products', function (Blueprint $table) {
  
 ---
  
-## 🌱 Seeders y Factories
+##  Seeders y Factories
  
 Los **seeders** llenan la BD con datos iniciales o de prueba. Los **factories** generan datos falsos.
  
@@ -114,7 +114,7 @@ public function run(): void
  
 ---
  
-## 🧱 Modelos, Controladores y Requests
+##  Modelos, Controladores y Requests
  
 ```bash
 php artisan make:model Product                 # solo el modelo
@@ -137,7 +137,7 @@ public function rules(): array
  
 ---
  
-## 🎁 Resources
+##  Resources
  
 Dan formato a las respuestas JSON de tu API.
  
@@ -160,7 +160,7 @@ public function toArray(Request $request): array
  
 ---
  
-## 🛡️ Middleware
+##  Middleware
  
 Es un **filtro** que se ejecuta antes o después de llegar al controlador. Se usa para autenticación, roles, logs, headers o forzar HTTPS.
  
@@ -198,7 +198,7 @@ Route::apiResource('products', ProductController::class)
  
 ---
  
-## ⚙️ Colas y comandos propios
+##  Colas y comandos propios
  
 ```bash
 php artisan queue:work                 # procesar trabajos en cola
@@ -208,5 +208,5 @@ php artisan list                       # ver todos los comandos de Artisan
  
 ---
  
-💡 **Tip:** agrega `--help` a cualquier comando para ver sus opciones. Ejemplo: `php artisan make:model --help`
+ **Tip:** agrega `--help` a cualquier comando para ver sus opciones. Ejemplo: `php artisan make:model --help`
 ```
