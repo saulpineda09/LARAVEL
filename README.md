@@ -1,211 +1,212 @@
-# LARAVEL
-Laravel es un framework de desarrollo web en PHP, es decir, un conjunto de herramientas, librerías y reglas que te ayudan a crear aplicaciones web de forma más rápida, organizada y segura que si escribieras todo el código PHP desde cero.
-
-Lo primero que se debe hacer es: 
-- instalar composer  
-Una vez instalado debemos instalar laravel de forma global para no tener ningun problema, lo hacemos con el siguiente comando:
-
+# 🚀 Laravel — Guía rápida de comandos
+ 
+Referencia corta de los comandos que más se usan en Laravel, con ejemplos listos para copiar.
+ 
+> **Laravel** es un framework de PHP que te da herramientas, estructura y seguridad para crear aplicaciones web más rápido que escribiendo todo desde cero.
+ 
+## 📑 Contenido
+ 
+- [Instalación](#-instalación)
+- [Ejecutar el proyecto](#-ejecutar-el-proyecto)
+- [Migraciones](#-migraciones)
+- [Seeders y Factories](#-seeders-y-factories)
+- [Modelos, Controladores y Requests](#-modelos-controladores-y-requests)
+- [Resources](#-resources)
+- [Middleware](#-middleware)
+- [Colas y comandos propios](#-colas-y-comandos-propios)
+---
+ 
+## 📦 Instalación
+ 
+Requisitos: **PHP** y **Composer**.
+ 
 ```bash
-composer  global require laravel/installer
+# Instalar el instalador de Laravel (una sola vez)
+composer global require laravel/installer
+ 
+# Crear un proyecto
+laravel new mi-proyecto
 ```
-----
-# CREAR UN PROYECTO POR TERMINAL 
+ 
+---
+ 
+## ▶️ Ejecutar el proyecto
+ 
 ```bash
-Laravel new <name_proyect>
+cd mi-proyecto
+php artisan serve                      # http://127.0.0.1:8000
+php -S localhost:8080 -t public        # alternativa con el servidor de PHP
 ```
-----
-# CORRER UN SERVIDOR PHP POR CONSOLA 
+ 
+Antes de correrlo con **XAMPP**:
+ 
+1. Enciende Apache y MySQL.
+2. Revisa el archivo `.env` y configura la base de datos:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3307          # usa el puerto de tu MySQL
+DB_DATABASE=mi_bd
+DB_USERNAME=root
+DB_PASSWORD=
+```
+3. Crea la base de datos en phpMyAdmin con el **mismo nombre** que pusiste en `DB_DATABASE`.
+---
+ 
+## 🗄️ Migraciones
+ 
+Las migraciones **versionan tu base de datos**: crean y modifican tablas con código en lugar de SQL manual. Laravel guarda en la tabla `migrations` cuáles ya se ejecutaron.
+ 
 ```bash
-php -S localhost:8080 -t public 
+php artisan make:migration create_products_table   # crear migración
+php artisan migrate                                 # ejecutar pendientes
+php artisan migrate:rollback                        # deshacer el último lote
+php artisan migrate:fresh --seed                    # borrar todo, recrear y sembrar
 ```
-----
-Para correr el sistema y ver que funciona debemos tomar en cuenta varios factores:  
-- Tener encendido xamp
-- revisar el archivo .env que esta en la raiz del proyecto que creaste
-- crear la BD en phpmyAdmin con el mismo nombre que viene en ese archivo en la parte de BD
-- usar el puerto correspondiente (en mi caso es el 3307)
-----
-
-# CREAR UN CONTROLADOR EN LARAVEL 
-```bash
-php artisan make:controller MiControlador
-```
-
-# EJECUTAR MIGRACIONES 
-
-```bash
-php artisan migrate 
-```
-Es una herramienta de Laravel para crear las tablas de la base de datos automáticamente según lo que hayas definido en tus archivos de migraciones.
-
-
-## ¿Qué hace? 
-1. **Busca las migraciones**   
-Laravel guarda en la carpeta database/migrations archivos que definen cómo deben crearse las tablas (usuarios, sesiones, posts, etc.).
-2. **Ejecuta esas instrucciones en la base de datos**  
-Crea las tablas con sus columnas, tipos de datos, índices y relaciones
-3. **Lleva un control de qué migraciones se han aplicado**  
-Laravel guarda en la tabla migrations un registro de todas las migraciones ya ejecutadas para no repetirlas.
-
-## ¿Para que sirve? 
-1. Evita escribir SQL a mano cada vez que creas una tabla.
-2. Permite versionar tu base de datos, ideal si trabajas en equipo.
-3. Facilita migrar cambios a producción sin perder datos.
-4. Con el mismo comando puedes deshacer migraciones si algo salió mal (php artisan migrate:rollback).
-----
-# CREAR UNA MIGRACION 
-Por ejemplo, si quiero crear una nueva tabla llamada ```product```
-
-```bash
-php artisan make:migration create_product_table
-```
-
-podemos agregar nuevos atributos a la tabla en el metodo up:  
-[![up.jpg](https://i.postimg.cc/NfKVSYrc/up.jpg)](https://postimg.cc/9rjJw6p8)  
-
-Y para que esos cambios se actualicen en la bd tenemos que ejecutar el comando visto anteriormente:  
-```bash
-php artisan migrate 
-```
-----
-# CREAR FOREIGN KEY CON MIGRACIONES 
-
----- 
-# REVERTIR MIGRACIONES 
-```bash
-php artisan migrate:rollback
-```
-----
-
-
-# CREAR UN SEEDER 
-En Laravel, un Seeder sirve para insertar datos automáticamente en tu base de datos, ya sea datos de prueba (dummy data) o datos iniciales necesarios para que la aplicación funcione.
-
-Piensa en él como un script que llena la base de datos sin que tengas que escribir cada registro a mano.  
-
-```bash
-php artisan make:seeder (nobre de la tabla)
-```
-----
-# EJECUTAR TODOS LOS SEEDER
-```bash
-php artisan make:seeder
-```
-----
-# EJECUTAAR UN SOLO SEEDER 
-```bash
-php artisan db:seed --class=ProductTableSeeder
-```
-----
-# BORRAR Y RECONSTRUIR LA BD CON SEEDER 
-Esto lo que hace borrar totalmente todas las tablas y volverlas a crear con --seed 
-```bash
-php artisan migrate:fresh --seed
-```
-----
-# CREAR MODELOS 
-```bash
-php artisan make:model (nombre de la tabla) 
-```
-# CREAR UN FACTORY
-
-```bash
-php artisan make:factory (nombre del factory)
-```
-# CREAR RESOURCE 
-
-```bash
-php artisan make:resource RolResource
-```
-# CREAR UN COLLECTION 
-
-```bash
-php artisan make:resource RolCollection
-```
-
-# CREAR UN REQUEST 
-
-```bash
-php artisan make:request UpdateProductRequest
-```
-# MIDDLEWARE  
-Un middleware en Laravel (y en general en frameworks web) es como un filtro o guardia que se ejecuta antes o después de que una petición llegue a tu controlador. 
-
-
-## Funciones principales del middleware  
-1. Autenticación y autorización
-   - Verifica si el usuario tiene un token válido.
-   - Checa si el usuario tiene permisos para acceder a un recurso (puedes bloquear algunos endpoints para ciertos usuarios con roles)
-2. Validaciones globales
-    - Rechazar peticiones si no cumplen con ciertas reglas.  
-    ```jemplo: evitar acceso desde ciertas IPs.```
-3. Transformar la petición o respuesta
-    - Modificar headers, sanitizar datos o añadir información extra.
-    
-4. Manejo de logs
-    - Registrar cada petición (quién accede, cuándo, qué hizo).
-5. Seguridad
-     - Evitar ataques como CSRF, XSS, etc.
-     - Forzar uso de HTTPS.
-
-**El codigo para crear un Meddleware es:**  
-```bash
- php artisan make:middleware checkValueInHeder
-```
- ## Ejemplo de middleware 
+ 
+**Ejemplo:** definir columnas en el método `up()`.
+ 
 ```php
-<?php
-
-namespace App\Http\Middleware;
-
-use Closure;
-use Illuminate\Http\Request;
-
-class CheckRole
+public function up(): void
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $role
-     * @return mixed
-     */
-    public function handle(Request $request, Closure $next, $role = null)
-    {
-        $user = $request->user();
-
-        // Si no hay usuario autenticado
-        if (! $user) {
-            return redirect()->route('login');
-        }
-
-        // Si el usuario no tiene el rol necesario
-        if ($role && ! $user->hasRole($role)) {
-            // Puedes devolver 403 o redireccionar
-            abort(403, 'No tienes permiso para acceder a este recurso.');
-        }
-
-        // Continuar con la petición
-        return $next($request);
-    }
+    Schema::create('products', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->decimal('price', 8, 2);
+        $table->timestamps();
+    });
 }
 ```
-y para agregarlo en el endpoint, se le agrega -> middleware("nombre o alias del middleware"::class): 
+ 
+**Llave foránea (foreign key):**
+ 
 ```php
-Route::apiResource("/product", ProductController::class)->middleware([LogRequests::class]);
+Schema::create('products', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+    $table->timestamps();
+});
 ```
-# EJECUTAR COLAS 
+ 
+---
+ 
+## 🌱 Seeders y Factories
+ 
+Los **seeders** llenan la BD con datos iniciales o de prueba. Los **factories** generan datos falsos.
+ 
+```bash
+php artisan make:seeder ProductSeeder
+php artisan make:factory ProductFactory
+php artisan db:seed                          # ejecutar todos los seeders
+php artisan db:seed --class=ProductSeeder    # ejecutar solo uno
 ```
-php artisan queue:work
+ 
+**Ejemplo:**
+ 
+```php
+// database/seeders/ProductSeeder.php
+public function run(): void
+{
+    Product::factory()->count(10)->create();
+}
 ```
-
-# Crear un nuevo comando 
+ 
+---
+ 
+## 🧱 Modelos, Controladores y Requests
+ 
+```bash
+php artisan make:model Product                 # solo el modelo
+php artisan make:model Product -mfsc           # + migración, factory, seeder y controller
+php artisan make:controller ProductController --api
+php artisan make:request StoreProductRequest   # validaciones
 ```
-php artisan make:command <nombre de  mi comando>
+ 
+**Ejemplo de Request** con reglas de validación:
+ 
+```php
+public function rules(): array
+{
+    return [
+        'name'  => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+    ];
+}
 ```
-
-# Mostrar todos los comandos  
+ 
+---
+ 
+## 🎁 Resources
+ 
+Dan formato a las respuestas JSON de tu API.
+ 
+```bash
+php artisan make:resource ProductResource                 # un registro
+php artisan make:resource ProductCollection --collection  # una lista
 ```
-php artisan list 
+ 
+```php
+// app/Http/Resources/ProductResource.php
+public function toArray(Request $request): array
+{
+    return [
+        'id'    => $this->id,
+        'name'  => $this->name,
+        'price' => $this->price,
+    ];
+}
+```
+ 
+---
+ 
+## 🛡️ Middleware
+ 
+Es un **filtro** que se ejecuta antes o después de llegar al controlador. Se usa para autenticación, roles, logs, headers o forzar HTTPS.
+ 
+```bash
+php artisan make:middleware CheckRole
+```
+ 
+```php
+public function handle(Request $request, Closure $next, ?string $role = null)
+{
+    $user = $request->user();
+ 
+    if (! $user) {
+        return redirect()->route('login');
+    }
+ 
+    if ($role && ! $user->hasRole($role)) {
+        abort(403, 'No tienes permiso para acceder a este recurso.');
+    }
+ 
+    return $next($request);
+}
+```
+ 
+**Usarlo en una ruta:**
+ 
+```php
+use App\Http\Middleware\CheckRole;
+ 
+Route::apiResource('products', ProductController::class)
+    ->middleware(CheckRole::class . ':admin');
+```
+ 
+> En Laravel 11+ puedes registrar un alias en `bootstrap/app.php` y usarlo como `->middleware('role:admin')`.
+ 
+---
+ 
+## ⚙️ Colas y comandos propios
+ 
+```bash
+php artisan queue:work                 # procesar trabajos en cola
+php artisan make:command MiComando     # crear un comando propio
+php artisan list                       # ver todos los comandos de Artisan
+```
+ 
+---
+ 
+💡 **Tip:** agrega `--help` a cualquier comando para ver sus opciones. Ejemplo: `php artisan make:model --help`
 ```
